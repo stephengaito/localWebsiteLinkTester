@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# This bash script uses sudo to install all required packages
+
+# The following variables MUST be set to match your needs
+muffetVersion=2.4.8
+
+
+muffetPlatform=$(uname -s)
+# see: https://stackoverflow.com/a/45125525
+case $(uname -m) in
+  aarch64*)
+    muffetArch=ARM64
+    ;;
+  arm6*)
+    muffetArch=ARMv6
+    ;;
+  arm7*)
+    muffetArch=ARMv7
+    ;;
+  i*86)
+    muffetArch=i386
+    ;;
+  x86_64)
+    muffetArch=x86_64
+    ;;
+  *)
+    echo "No suitable muffet version exists for your machine"
+    exit 1
+esac
+
+muffetURL=https://github.com/raviqqe/muffet/releases/download/v${muffetVersion}/muffet_${muffetVersion}_${muffetPlatform}_${muffetArch}.tar.gz
+wget -c ${muffetURL} -O - | tar -zxv
+
+echo ""
+echo "---------------------------------------------------------------"
+echo ""
+echo "installing nghttp2 server"
+echo ""
+echo "you WILL need your sudo password..."
+echo ""
+
+sudo apt install nghttp2-server
+

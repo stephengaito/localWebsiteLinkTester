@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This bash script uses nghttp2-server and GoLang's muffet to test the
+# links in a *static* website located in the given directory.
+
+if test $# -ne 1 ; then
+  echo "usage: testLinks <rootDirectory>"
+  exit 1
+fi
+
+rootDir=$1
+
+echo "testing website located in $rootDir"
+
