@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Move this over to a python asyncio application which runs the 
+# http.server in one thread and muffet in single page mode over each 
+# *.html page in root directory. 
+
+# We will be looking for:
+#
+# 1. broken links (404 and lookup errors)
+#
+# 2. all links (for possible moving)
+
 # This bash script uses nghttp2-server and GoLang's muffet to test the
 # links in a *static* website located in the given directory.
 
@@ -10,5 +20,20 @@ fi
 
 rootDir=$1
 
-echo "testing website located in $rootDir"
+python -m http.server --bind 127.0.0.1 --directory $rootDir 9070 &
 
+serverPID=$!
+
+echo "running python http.server on [$serverPID]"
+
+echo ""
+
+read -p "press return to continue..." contVar
+
+echo "continuing with [$contVar]"
+
+kill -9 $serverPID
+
+echo ""
+echo "done!"
+echo ""

@@ -31,14 +31,3 @@ esac
 
 muffetURL=https://github.com/raviqqe/muffet/releases/download/v${muffetVersion}/muffet_${muffetVersion}_${muffetPlatform}_${muffetArch}.tar.gz
 wget -c ${muffetURL} -O - | tar -zxv
-
-echo ""
-echo "---------------------------------------------------------------"
-echo ""
-echo "installing nghttp2 server"
-echo ""
-echo "you WILL need your sudo password..."
-echo ""
-
-sudo apt install nghttp2-server
-
